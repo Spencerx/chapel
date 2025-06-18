@@ -97,7 +97,7 @@ implementation based on ``mpz_t``.  So, for example:
 
 .. code-block:: chapel
 
-  x  = b
+  x  = b;
   x *= c;
   x += a;
 
@@ -135,7 +135,7 @@ truncated.  GMP primitives are used to first cast to platform-specific C
 types, which are then cast to Chapel types.  As a result, casting to
 64-bit types on 32-bit platforms may result in additional truncation.
 Additionally, casting a negative ``bigint`` to a ``uint`` will result in
-the absolute value truncated to fit within the type.:
+the absolute value truncated to fit within the type:
 
 .. code-block:: chapel
 
@@ -464,6 +464,13 @@ module BigInteger {
   /* Constructs a new :record:`bigint` from ``x``, see :proc:`bigint.init`. */
   inline operator :(x: bool, type t: bigint): bigint throws {
     return new bigint(x:int);
+  }
+
+  /* Constructs a new :record:`bigint` from ``x`` */
+  inline operator :(x: real, type t: bigint): bigint {
+    var bi: bigint;
+    bi.set(x);
+    return bi;
   }
 
   /*
