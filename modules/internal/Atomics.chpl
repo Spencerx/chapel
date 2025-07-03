@@ -244,6 +244,7 @@ module Atomics {
 
   pragma "atomic type"
   pragma "ignore noinit"
+  @chpldoc.hideImplType
   record AtomicBool : writeSerializable {
     // Support `valType` on atomic bool type and instances for symmetry with
     // numeric atomics
@@ -435,6 +436,7 @@ module Atomics {
 
   // TODO: should this be an operator method AtomicBool.: ?
   pragma "do not resolve unless called"
+  pragma "no copy return"
   @chpldoc.nodoc
   operator :(rhs: bool, type t:AtomicBool) {
     var lhs: AtomicBool = rhs; // use init=
@@ -443,6 +445,7 @@ module Atomics {
 
   pragma "atomic type"
   pragma "ignore noinit"
+  @chpldoc.hideImplType
   record AtomicT : writeSerializable {
     @chpldoc.nodoc
     type valType;
@@ -812,6 +815,7 @@ module Atomics {
   }
 
   // TODO: should this be an operator method AtomicT.: ?
+  pragma "no copy return"
   @chpldoc.nodoc
   operator :(rhs, type t:AtomicT)
   where rhs.type == t.valType {

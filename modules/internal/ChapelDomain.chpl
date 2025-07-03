@@ -47,6 +47,7 @@ module ChapelDomain {
   config param noNegativeStrideWarnings = false;
 
   @chpldoc.nodoc
+  @edition(last="2.0")
   config param noSortedWarnings = false;
 
   pragma "no copy return"
@@ -832,7 +833,7 @@ module ChapelDomain {
   }
 
   @chpldoc.nodoc
-  operator =(ref a: domain, b) {  // b is iteratable
+  operator =(ref a: domain, b) {  // b is iterable
     if a.isRectangular() then
       compilerError("assigning ", b.type:string, " to a rectangular domain");
     if ! canBeIteratedOver(b) then
@@ -1048,6 +1049,7 @@ module ChapelDomain {
   pragma "domain"
   pragma "has runtime type"
   pragma "ignore noinit"
+  @chpldoc.hideImplType
   record _domain : writeSerializable, readDeserializable {
     var _pid:int; // only used when privatized
     pragma "owned"
@@ -1796,6 +1798,7 @@ module ChapelDomain {
       domain will be default-initialized. They can be set to desired
       values as usual, for example using an assignment operator.
     */
+    @chpldoc.hideImplType
     record unsafeAssignManager : contextManager {
       @chpldoc.nodoc
       var _lhsInstance;
@@ -2827,6 +2830,7 @@ module ChapelDomain {
          It is recommended to use :proc:`Sort.sorted` instead of this method.
 
     */
+    @edition(last="2.0")
     iter sorted(comparator:?t = chpl_defaultComparator()) {
       if !this.isAssociative() then
         compilerError("'.sorted()' is only supported on associative domains");
