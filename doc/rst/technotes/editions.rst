@@ -122,3 +122,22 @@ remain in the pre-edition until they are deemed sufficiently complete.
   This behavior is potentially breaking for ``ref = reshape(A, D);`` cases.
   The behavior when storing into a ``var`` or ``const`` is unchanged.
 
+  Other changes to this function include:
+
+  - the ability to reshape to a 1D inferred-size array (like
+    ``reshape(A, 1..)``)
+  - the ability to specify the shape using a series of ranges rather than a
+    domain (e.g., ``reshape(A, 1..n, 1..n)``)
+  - the (default-on) check to make sure dimensions don’t get split or combined
+    in surprising (potentially buggy) ways
+
+  See the note on :chpl:proc:`~ChapelArray.reshape` for more information.
+
+- The ``domain.sorted`` iterator method has been removed. It was only
+  implemented for associative domains (as that was the only type of domain that
+  could be sorted) and all other ``sort`` / ``sorted`` methods have been
+  removed. The intended replacement is to import ``Sort`` and call
+  :chpl:proc:`Sort.sorted(domain)<Sort.sorted>`.
+
+  The temporary config ``noSortedWarnings`` has also been removed, as its only
+  purpose was to suppress warnings about the ``domain.sorted`` method.

@@ -137,7 +137,8 @@ with ``CHPL_RT_NUM_THREADS_PER_LOCALE=8 ./application -nl 4``. That
 uses 8 threads per locale, with 4 locales, so a total of 32 threads.
 
 See also :ref:`num-threads-per-locale`,
-:ref:`oversubscribed-execution`, and :ref:`using-udp`.
+:ref:`oversubscribed-execution`, :ref:`readme-gasnet-emulating-multilocale`,
+and :ref:`using-udp`.
 
 
 Measuring Performance
@@ -323,6 +324,20 @@ colocales
   Using ``native`` or the CPU family that you are targeting, rather than
   ``none`` or ``unknown``, can allow using newer instruction sets (e.g.
   AVX512) and improve performance.
+
+Network-specific communication settings
+
+  Please see the documentation for the network that you are using for
+  more details on what can be adjusted. Some specific variables you might
+  consider:
+
+    * :ref:`CHPL_RT_COMM_OFI_DEDICATED_AMH_CORES <readme-libfabric-CHPL_RT_COMM_OFI_DEDICATED_AMH_CORES>`
+      when using ``CHPL_COMM=ofi`` can be used to dedicate a core to
+      service requests that arrive over the network
+
+    * :ref:`CHPL_RT_COMM_GASNET_DEDICATED_PROGRESS_CORE <readme-infiniband-CHPL_RT_COMM_GASNET_DEDICATED_PROGRESS_CORE>`
+      when using ``CHPL_COMM=gasnet`` with ``CHPL_COMM_SUBSTRATE=ibv``
+      offers a similar capability for InfiniBand
 
 ..
   comment: cover ``--llvm-wide-opt`` when it becomes less experemental

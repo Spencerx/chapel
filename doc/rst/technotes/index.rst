@@ -21,7 +21,6 @@ Base Language Features
    Including Sub-Modules from Separate Files <module_include>
    main() Functions <main>
    Module Search Paths <module_search>
-   Operator Methods <operatorMethods>
    The 'manage' Statement <manage>
    Attributes <attributes>
    Interfaces <interfaces>
@@ -35,7 +34,6 @@ Initializers and Generic Programming
    :maxdepth: 1
 
    Forwarding Methods Calls <forwarding>
-   The ‘init=’ Method <initequals>
    Invoking Initializers with a Generic Instantiation <initTypeAlias>
    Partial Instantiations <partialInstantiations>
    Throwing Initializers <throwingInit>
